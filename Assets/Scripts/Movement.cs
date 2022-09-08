@@ -7,10 +7,13 @@ public class Movement : MonoBehaviour
     public CharacterController controller;
     private Vector3 direction;
     public float speed = 8;
+
     public float jumpForce = 10;
     public float gravity = -20;
     public Transform groundCheck;
     public LayerMask groundLayer;
+
+    public bool ableToMakeADoubleJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,15 +28,26 @@ public class Movement : MonoBehaviour
         direction.z = hInput * speed;
 
         bool isGrounded = Physics.CheckSphere(groundCheck.position,0.2f, groundLayer);
-        Debug.Log(isGrounded);
-        direction.y += gravity * Time.deltaTime;
+        
+        
 
         if (isGrounded)
         {
+            ableToMakeADoubleJump = true;
             if (Input.GetButtonDown("Jump"))
-                {
-                    direction.y = jumpForce;
-                }
+            {
+                direction.y = jumpForce;
+            }
+        } else
+        {
+            direction.y += gravity * Time.deltaTime;
+
+            if (ableToMakeADoubleJump && Input.GetButtonDown("Jump"))
+            {
+                direction.y = jumpForce;
+                ableToMakeADoubleJump = false;
+            }
+               
         }
 
         
