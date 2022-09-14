@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         float hInput = Input.GetAxis("Horizontal");
-        direction.z = hInput * speed;
+        direction.x = hInput * speed;
 
         bool isGrounded = Physics.CheckSphere(groundCheck.position,0.2f, groundLayer);
         
