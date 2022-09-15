@@ -9,9 +9,13 @@ public class Movement : MonoBehaviour
     public float speed = 8;
 
     public float jumpForce = 10;
-    public float gravity = -20;
+    public float gravity = -10;
+    
     public Transform groundCheck;
+    public Transform vacioCheck;
+
     public LayerMask groundLayer;
+    public LayerMask vacioLayer;
 
     public bool ableToMakeADoubleJump = true;
 
@@ -28,8 +32,9 @@ public class Movement : MonoBehaviour
         direction.x = hInput * speed;
 
         bool isGrounded = Physics.CheckSphere(groundCheck.position,0.2f, groundLayer);
-        
-        
+        bool isVacio = Physics.CheckSphere(vacioCheck.position, 0.2f, vacioLayer);
+
+
 
         if (isGrounded)
         {
@@ -50,7 +55,12 @@ public class Movement : MonoBehaviour
                
         }
 
-        
+
+        if (isVacio)
+        {
+            
+        }
+
 
         controller.Move(direction * Time.deltaTime);
     }
