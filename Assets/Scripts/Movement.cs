@@ -32,7 +32,6 @@ public class Movement : MonoBehaviour
         direction.x = hInput * speed;
 
         bool isGrounded = Physics.CheckSphere(groundCheck.position,0.2f, groundLayer);
-        bool isVacio = Physics.CheckSphere(vacioCheck.position, 0.2f, vacioLayer);
 
 
 
@@ -54,13 +53,6 @@ public class Movement : MonoBehaviour
             }
                
         }
-
-
-        if (isVacio)
-        {
-            
-        }
-
 
         controller.Move(direction * Time.deltaTime);
     }
